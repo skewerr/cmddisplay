@@ -78,10 +78,24 @@ draw_line_c1 (
     if (x1 > x2)
         switch_value(&x1, &x2);
 
+    int y1 = (long) (m*x1 + n + 0.5);
+
+    int c1 = y1, c2 = y1 + (m > 0) ? 1:-1;
+
     int i;
     for (i = x1; i <= x2; i++)
     {
-        // TODO
+        float dif1 = fabs((m*i + n) - c1);
+        float dif2 = fabs((m*i + n) - c2);
+
+        if (dif1 > dif2)
+        {
+            display_paint(d, i, c2);
+            c1 += (m > 0) ? 1:-1;
+            c2 += (m > 0) ? 1:-1;
+        }
+        else
+            display_paint(d, i, c1);
     }
 }
 
@@ -98,9 +112,23 @@ draw_line_c2 (
     if (y1 > y2)
         switch_value(&y1, &y2);
 
+    int x1 = (long) ((y1 - n)/m + 0.5);
+
+    int c1 = x1, c2 = x1 + (m > 0) ? 1:-1;
+
     int i;
-    for (i = x1; i <= x2; i++)
+    for (i = y1; i <= y2; i++)
     {
-        // TODO
+        float dif1 = fabs((i - n)/m - c1);
+        float dif2 = fabs((i - n)/m - c2);
+
+        if (dif1 > dif2)
+        {
+            display_paint(d, c2, i);
+            c1 += (m > 0) ? 1:-1;
+            c2 += (m > 0) ? 1:-1;
+        }
+        else
+            display_paint(d, c1, i);
     }
 }
