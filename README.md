@@ -1,9 +1,9 @@
 cmddisplay
 ===========
 
-A set of uh... libraries? I don't know, files that can be
-included, those are libraries, right? Whatever you want to
-call these, I don't care.
+A set of uh... libraries? I don't know, headers that can be
+included and are implemented, those are libraries, right?
+Whatever you want to call these, I don't care.
 
 I initially made these for some guys who wanted to make a
 game in C, in the command line, but weren't really comfortable
