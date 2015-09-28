@@ -17,7 +17,7 @@ static void draw_line_c1 (  // Used to draw straight lines with
 
 static void draw_line_c2 (  // Used to draw straight lines with
     display *d,             // an angular coefficient in the
-    int y1, int y2          // (-inf, -1)U(1, +inf) interval.
+    int y1, int y2,         // (-inf, -1)U(1, +inf) interval.
     float m, float n        // Candidate pixels are next to
 );                          // each other. Again, m and n.
 

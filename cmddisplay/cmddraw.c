@@ -80,7 +80,7 @@ draw_line_c1 (
 
     int y1 = (long) (m*x1 + n + 0.5);
 
-    int c1 = y1, c2 = y1 + (m > 0) ? 1:-1;
+    int c1 = y1, c2 = y1 + ((m > 0) ? 1:-1);
 
     int i;
     for (i = x1; i <= x2; i++)
@@ -114,7 +114,7 @@ draw_line_c2 (
 
     int x1 = (long) ((y1 - n)/m + 0.5);
 
-    int c1 = x1, c2 = x1 + (m > 0) ? 1:-1;
+    int c1 = x1, c2 = x1 + ((m > 0) ? 1:-1);
 
     int i;
     for (i = y1; i <= y2; i++)
