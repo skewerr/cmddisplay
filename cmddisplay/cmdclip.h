@@ -15,7 +15,7 @@
 int clip_line (             // Will clip a line segment
     display *d,             // based on an angular coef.,
     int *x1, int *x2,       // a linear coef., an initial
-    int *y1, int *y2        // point and a final one. Using
+    int *y1, int *y2,       // point and a final one. Using
     float m, float n        // the Cohen-Sutherland algorithm.
 );
 
