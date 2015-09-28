@@ -6,7 +6,7 @@ included, those are libraries, right? Whatever you want to
 call these, I don't care.
 
 I initially made these for some guys who wanted to make a
-game in C, in the command line, but weren's really comfortable
+game in C, in the command line, but weren't really comfortable
 with the language. I'm not experienced at all, but I like C.
 
 So I quickly pulled something off similar to this and gave it
