@@ -6,7 +6,8 @@
 
 #include "misc.h"
 
-void set_cursor (int x, int y)
+void
+set_cursor (int x, int y)
 {
 #ifdef _WIN32
     COORD coord = {x, y};
@@ -16,7 +17,8 @@ void set_cursor (int x, int y)
 #endif
 }
 
-void switch_value (int *a, int *b)
+void
+switch_value (int *a, int *b)
 {
     int temp = *a;
     *a = *b;
