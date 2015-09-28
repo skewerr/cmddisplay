@@ -2,7 +2,10 @@
 #include "cmddisplay.h"
 #include "cmdclip.h"
 
-bool
+#define true 1
+#define false 0
+
+int
 clip_line (
     display *d,
     int *x1, int *x2,
@@ -36,10 +39,12 @@ clip_line (
     { *y1 = 0; *x1 = (-n)/m; }
     else
     { *y2 = 0; *x2 = (-n)/m; }
+
+    return false;
 }
 
 
-bool
+int
 clip_line_x (
     display *d,
     int *x1, int *x2,
@@ -54,7 +59,7 @@ clip_line_x (
 }
 
 
-bool
+int
 clip_line_y (
     display *d,
     int *y1, int *y2,

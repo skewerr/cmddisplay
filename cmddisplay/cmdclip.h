@@ -1,7 +1,6 @@
 #ifndef CMDCLIP_H
 #define CMDCLIP_H
 
-#include <stdbool.h>
 #include "cmddisplay.h"
 
 /*
@@ -13,20 +12,20 @@
 *   rasterized.
 */
 
-bool clip_line (            // Will clip a line segment
+int clip_line (             // Will clip a line segment
     display *d,             // based on an angular coef.,
     int *x1, int *x2,       // a linear coef., an initial
     int *y1, int *y2        // point and a final one. Using
     float m, float n        // the Cohen-Sutherland algorithm.
 );
 
-bool clip_line_x (          // These will act as wrappers for
+int clip_line_x (           // These will act as wrappers for
     display *d,             // the clip_line function. Instead
     int *x1, int *x2,       // of giving pointers to y or x
     float m, float n        // files, these should fill in the
 );                          // blanks based on m, n, and the
                             // coordinates it receives.
-bool clip_line_y (
+int clip_line_y (
     display *d,             // It then passes pointers to them
     int *y1, int *y2,       // to the clip_line function.
     float m, float n
