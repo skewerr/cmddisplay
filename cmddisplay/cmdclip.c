@@ -16,28 +16,28 @@ clip_line (
         return true;                            // screen boundary.
     else if (*x1 < 0)                           // x = 0.
     { *x1 = 0; *y1 = n; }
-    else
+    else if (*x2 < 0)
     { *x2 = 0; *y2 = n; }
 
     if (*y1 >= d->height && *y2 >= d->height)   // Testing for the upper
         return true;                            // screen boundary.
     else if (*y1 >= d->height)                  // y = d->height - 1
     { *y1 = d->height -1; *x1 = (*y1 - n)/m; }
-    else
+    else if (*y2 >= d->height)
     { *y2 = d->height -1; *x2 = (*y2 - n)/m; }
 
     if (*x1 >= d->width && *x2 >= d->width)     // Testing for the right
         return true;                            // screen boundary.
     else if (*x1 >= d->width)                   // x = d->width - 1
     { *x1 = d->width -1; *y1 = m*(*x1) + n; }
-    else
+    else if (*x2 >= d->width)
     { *x2 = d->width -1; *y2 = m*(*x1) + n; }
 
     if (*y1 < 0 && *y2 < 0)                     // Testing for the lower
         return true;                            // screen boundary.
     else if (*y1 < 0)                           // y = 0
     { *y1 = 0; *x1 = (-n)/m; }
-    else
+    else if (*y2 < 0)
     { *y2 = 0; *x2 = (-n)/m; }
 
     return false;
