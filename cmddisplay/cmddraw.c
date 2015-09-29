@@ -1,8 +1,36 @@
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "cmddisplay.h"
 #include "cmddraw.h"
 #include "cmdclip.h"
 #include "misc.h"
+
+
+void
+draw_sprite (display *d, char *path, int x, int y)
+{
+    FILE *sp = fopen(path, "r");
+
+    if (sp == NULL)
+    {
+        printf("ERROR: Can't read file %s. Does it exist?\n", path);
+        exit(1);
+    }
+
+    char t, i = x;
+    while ((t = fgetc(sp)) != EOF)
+    {
+        if (t != '\n' && t != ' ')
+            display_put_raw(d, i++, d->height-1 - y, t);
+        else if (t == ' ')
+            i++;
+        else
+        { y++; i = x; }
+    }
+
+    fclose(sp);
+}
 
 
 void
