@@ -1,12 +1,5 @@
-#ifdef _WIN32
 #include <windows.h>
 #include <conio.h>
-#else
-#include <unistd.h>
-#include <curses.h>
-#include <lconio/conio.h>
-#endif
-
 #include <stdbool.h>
 #include <cmddisplay.h>
 #include <cmddraw.h>
@@ -140,11 +133,8 @@ game_loop (display *d)
         draw_borders(d);
         draw_snake(d, &s);
         display_show(d);
-#ifdef _WIN32
+
         Sleep(g_sleep);
-#else
-        usleep(g_sleep*1000);
-#endif
     }
 }
 
@@ -160,15 +150,7 @@ main (int argc, char **argv)
     else
         g_sleep = 50;
 
-#ifndef _WIN32
-    initconio();
-#endif
-
     game_loop(&d);
 
     display_destroy(&d);
-
-#ifndef _WIN32
-    doneconio();
-#endif
 }
