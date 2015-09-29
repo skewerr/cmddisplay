@@ -12,5 +12,9 @@ libcmddisplay.a: $(OBJ)
 	$(AR) -cvq $@ $^
 	$(RLIB) $@
 
+install:
+	cp libcmddisplay.a /usr/local/lib
+	cp *.h /usr/local/include
+
 clean:
 	rm *.o
