@@ -1,11 +1,12 @@
 #ifdef _WIN32
 #include <windows.h>
+#include <conio.h>
 #else
 #include <unistd.h>
 #include <curses.h>
+#include <lconio/conio.h>
 #endif
 
-#include <conio.h>
 #include <stdbool.h>
 #include <cmddisplay.h>
 #include <cmddraw.h>
@@ -159,7 +160,7 @@ main (int argc, char **argv)
     else
         g_sleep = 50;
 
-#ifdef __unix__
+#ifndef _WIN32
     initconio();
 #endif
 
@@ -167,7 +168,7 @@ main (int argc, char **argv)
 
     display_destroy(&d);
 
-#ifdef __unix__
+#ifndef _WIN32
     doneconio();
 #endif
 }
