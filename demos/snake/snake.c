@@ -2,6 +2,7 @@
 #include <windows.h>
 #else
 #include <unistd.h>
+#include <curses.h>
 #endif
 
 #include <conio.h>
@@ -158,7 +159,15 @@ main (int argc, char **argv)
     else
         g_sleep = 50;
 
+#ifdef __unix__
+    initconio();
+#endif
+
     game_loop(&d);
 
     display_destroy(&d);
+
+#ifdef __unix__
+    doneconio();
+#endif
 }
