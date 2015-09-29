@@ -24,12 +24,12 @@ queue_resize (queue *q, int size)
 {
     queue r;
     queue_create(&r, size);
-    
+
     while (!queue_is_empty(q) && !queue_is_full(&r))
         queue_enqueue(&r, queue_dequeue(q));
-    
+
     queue_destroy(q);
-    
+
     *q = r;
 }
 
@@ -42,7 +42,7 @@ queue_enqueue (queue *q, pos data)
         printf("ERROR: Full queue. (enqueue %d,%d)\n", data.x, data.y);
         return;
     }
-    
+
     q->content[q->end] = data;
     q->end = ++q->end % q->size;
     q->length++;
@@ -57,7 +57,7 @@ queue_dequeue (queue *q)
         printf("ERROR: Empty queue. (dequeue)\n");
         return position(0,0);
     }
-    
+
     pos e = queue_start(q); q->length--;
     q->start = ++q->start % q->size;
     return e;
@@ -83,13 +83,13 @@ void
 queue_fill (queue *q)
 {
     static bool seeded = false;
-    
+
     if (!seeded)
     {
         srand(time(NULL));
         seeded = true;
     }
-    
+
     while (!queue_is_full(q))
     {
         pos p;
@@ -105,7 +105,7 @@ queue_invert (queue *q)
 {
     if (queue_is_empty(q))
         return;
-    
+
     pos c = queue_dequeue(q);
     queue_invert(q);
     queue_enqueue(q, c);
@@ -116,10 +116,10 @@ void
 queue_copy (queue *q, queue *r)
 {
     int c;
-    
+
     queue_destroy(q);
     queue_create(q, r->size);
-    
+
     for (c = 0; c < r->length; c++)
     {
         pos e = queue_dequeue(r);
@@ -133,10 +133,10 @@ void
 queue_join (queue *q, queue *r)
 {
     int c;
-    
+
     if (q->size < q->length + r->length)
         queue_resize(q, q->length + r->length);
-    
+
     for (c = 0; c < r->length; c++)
     {
         pos e = queue_dequeue(r);
@@ -174,7 +174,7 @@ queue_start (queue *q)
         printf("ERROR: Empty queue. (start)\n");
         return position(0,0);
     }
-    
+
     return q->content[q->start];
 }
 
@@ -197,7 +197,7 @@ void
 queue_print (queue *q)
 {
     int c;
-    
+
     for (c = 0; c < q->length; c++)
     {
         printf(
@@ -207,7 +207,7 @@ queue_print (queue *q)
         );
         queue_enqueue(q, queue_dequeue(q));
     }
-    
+
     printf("End of queue.\n");
 }
 
