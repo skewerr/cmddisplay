@@ -23,6 +23,15 @@ display_create (display *d, int width, int height)
 
 
 void
+display_put_raw (display *d, int x, int y, char c)
+{
+    if (x >= 0 && x < d->width
+        && y >= 0 && y < d->height)
+        d->screen[y*d->width + x] = c;
+}
+
+
+void
 display_paint (display *d, int x, int y)
 {
     if (x >= 0 && x < d->width

@@ -7,6 +7,7 @@ typedef struct {
 } display;
 
 void display_create     (display *d, int width, int height);
+void display_put_raw    (display *d, int x, int y, char c);
 void display_paint      (display *d, int x, int y);
 void display_empty      (display *d, int x, int y);
 void display_show       (display *d);
