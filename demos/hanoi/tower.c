@@ -23,7 +23,7 @@ tower_create (tower *t, int size)
     stack_create(&t->c, size);
 
     int i;
-    for (i = size; i > 0; i--)
+    for (i = size+3; i > 3; i--)
         stack_push(&t->a, i);
 }
 
