@@ -11,7 +11,7 @@
 #include <stack.h>
 #include <tower.h>
 
-int g_sleep = 15;
+unsigned int g_sleep = 15;
 
 
 void
@@ -44,6 +44,8 @@ draw_tower (display *d, tower *t)
 void
 tower_move_a (display *d, tower *t, stack *a, stack *b)
 {
+    static int move_count = 0;
+
     int disc = stack_pop(a);
     int pos1 = (d->width/4) * ((a == &t->a) ? 1 : 
                                (a == &t->b) ? 2 : 3);
@@ -60,6 +62,7 @@ tower_move_a (display *d, tower *t, stack *a, stack *b)
 
         draw_tower(d, t);
         draw_line(d, pos1 - disc, i, pos1 + disc, i);
+        display_puts(d, 3, d->height-4, "Movements: %d", move_count);
 
         display_show(d);
 
@@ -75,6 +78,7 @@ tower_move_a (display *d, tower *t, stack *a, stack *b)
 
         draw_tower(d, t);
         draw_line(d, i - disc, d->height-9, i + disc, d->height-9);
+        display_puts(d, 3, d->height-4, "Movements: %d", move_count);
 
         display_show(d);
 
@@ -90,6 +94,7 @@ tower_move_a (display *d, tower *t, stack *a, stack *b)
 
         draw_tower(d, t);
         draw_line(d, pos2 - disc, i, pos2 + disc, i);
+        display_puts(d, 3, d->height-4, "Movements: %d", move_count);
 
         display_show(d);
 
@@ -100,7 +105,10 @@ tower_move_a (display *d, tower *t, stack *a, stack *b)
 #endif
     }
 
+    move_count++;
     stack_push(b, disc);
+    display_puts(d, 3, d->height-4, "Movements: %d", move_count);
+    display_show(d);
 }
 
 
@@ -143,7 +151,16 @@ main (int argc, char **argv)
     display_create(&d, 120, 30);
 
     if (argc > 1)
-        g_sleep = atoi(argv[1]);
+    {
+        char *e;
+        g_sleep = strtoul(argv[1], &e, 10);
+
+        if (e == argv[1])
+        {
+            printf("Invalid number.\n");
+            exit(1);
+        }
+    }
 
     tower_start(&d);
 
