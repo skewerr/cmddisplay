@@ -36,7 +36,7 @@ stack_push (stack *s, int data)
 {
     if (stack_is_full(s))
     {
-        printf("ERRO: Pilha cheia. (push %d)\n", data);
+        printf("ERROR: Stack overflow attempt. (push %d)\n", data);
         return;
     }
 
@@ -49,7 +49,7 @@ stack_pop (stack *s)
 {
     if (stack_is_empty(s))
     {
-        printf("ERRO: Pilha vazia. (pop)\n");
+        printf("ERROR: Empty stack. (pop)\n");
         return 0;
     }
 
@@ -169,7 +169,7 @@ stack_top (stack *s)
 {
     if (stack_is_empty(s))
     {
-        printf("ERRO: Pilha vazia. (top)\n");
+        printf("ERROR: Empty stack. (top)\n");
         return 0;
     }
 
@@ -189,7 +189,7 @@ stack_print (stack *s)
 {
     if (stack_is_empty(s))
     {
-        printf("Fim da pilha.\n");
+        printf("End of stack.\n");
         return;
     }
 
