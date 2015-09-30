@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdarg.h>
 #include "cmddisplay.h"
 #include "misc.h"
 
@@ -19,6 +20,30 @@ display_create (display *d, int width, int height)
     int i;
     for (i = 0; i < height*width; i++)
         d->screen[i] = EMPTY_CHAR;
+}
+
+
+void
+display_puts (
+    display *d,
+    int x, int y,
+    char *fmt, ...)
+{
+    char line[d->width+1];
+    int i;
+
+    va_list ap;
+    va_start(ap, fmt);
+    vsnprintf(line, d->width+1, fmt, ap);
+    va_end(ap);
+
+    for (i = 0; line[i]; i++)
+    {
+        if (line[i] != '\n')
+            display_put_raw(d, x, y, line[i]);
+
+        x++;
+    }
 }
 
 

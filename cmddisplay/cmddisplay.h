@@ -14,4 +14,6 @@ void display_show       (display *d);
 void display_clear      (display *d);
 void display_destroy    (display *d);
 
+void display_puts       (display *d, int x, int y, char *fmt, ...);
+
 #endif
