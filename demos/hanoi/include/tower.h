@@ -9,6 +9,7 @@ typedef struct {
 
 void tower_create   (tower *t, int size);
 void tower_destroy  (tower *t);
+void tower_print    (tower *t);
 
 void tower_move     (stack *s, stack *t);
 

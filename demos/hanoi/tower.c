@@ -1,5 +1,18 @@
+#include <stdio.h>
 #include <stack.h>
 #include <tower.h>
+
+
+void
+tower_print (tower *t)
+{
+    printf("\nA = ");
+    stack_print(&t->a);
+    printf("B = ");
+    stack_print(&t->b);
+    printf("C = ");
+    stack_print(&t->c);
+}
 
 
 void
