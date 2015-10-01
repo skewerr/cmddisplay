@@ -8,6 +8,16 @@
 
 
 void
+draw_rectangle (display *d, int x1, int y1, int x2, int y2)
+{
+    int i, j;
+    for (i = x1; i != x2; i += (x1 > x2) ? -1:1)
+        for (j = y1; j != y2; j += (y1 > y2) ? -1:1)
+            display_paint(d, i, j);
+}
+
+
+void
 draw_sprite (display *d, char *path, int x, int y)
 {
     FILE *sp = fopen(path, "r");
