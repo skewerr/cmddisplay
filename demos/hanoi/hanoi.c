@@ -130,10 +130,42 @@ tower_solve (
 
 
 void
+tower_play (display *d, tower *t)
+{
+    int move;
+
+    for (;;)
+    {
+        draw_tower(d, t);
+        display_show(d);
+
+        printf("\nMoves follow: N1N2, where N1 and N2 are the"
+            " number of the corresponding stacks you want to"
+            " move discs from and to, respectively.\n"
+            "Example: 12, 32, 13, 23...\n\n");
+
+        printf("\nMake your move:   \b\b");
+        scanf("%d", &move);
+
+        switch (move)
+        {
+            case 12: tower_move_a(d, t, &t->a, &t->b); break;
+            case 13: tower_move_a(d, t, &t->a, &t->c); break;
+            case 21: tower_move_a(d, t, &t->b, &t->a); break;
+            case 23: tower_move_a(d, t, &t->b, &t->c); break;
+            case 31: tower_move_a(d, t, &t->c, &t->a); break;
+            case 32: tower_move_a(d, t, &t->c, &t->b); break;
+            default: printf("\b\rCan't be done.      ");
+        }
+    }
+}
+
+
+void
 tower_start (display *d)
 {
     tower t;
-    int n;
+    int n, p;
 
     printf("Number of discs: ");
     scanf("%d", &n);
@@ -145,8 +177,17 @@ tower_start (display *d)
         exit(1);
     }
 
+    printf("\nDo you want to play or see the solution?\n"
+        "1 - Play, anything else - See the solution\n");
+    scanf("%d", &p);
+
     tower_create(&t, n);
-    tower_solve(d, &t, n, &t.a, &t.c, &t.b);
+
+    if (p == 1)
+        tower_play(d, &t);
+    else
+        tower_solve(d, &t, n, &t.a, &t.c, &t.b);
+
     tower_destroy(&t);
 }
 
