@@ -8,12 +8,22 @@
 
 
 void
-draw_rectangle (display *d, int x1, int y1, int x2, int y2)
+draw_solid_rectangle (display *d, int x1, int y1, int x2, int y2)
 {
     int i, j;
     for (i = x1; i != x2; i += (x1 > x2) ? -1:1)
         for (j = y1; j != y2; j += (y1 > y2) ? -1:1)
             display_paint(d, i, j);
+}
+
+
+void
+draw_wire_rectangle (display *d, int x1, int y1, int x2, int y2)
+{
+    draw_line(d, x1, y1, x1, y2);
+    draw_line(d, x1, y1, x2, y1);
+    draw_line(d, x1, y2, x2, y2);
+    draw_line(d, x2, y1, x2, y2);
 }
 
 
