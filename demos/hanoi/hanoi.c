@@ -138,6 +138,13 @@ tower_start (display *d)
     printf("Number of discs: ");
     scanf("%d", &n);
 
+    if (n > 15 || n <= 0)
+    {
+        printf("Please use a lower number of discs.\n"
+                "0 or lower also won't do.\n");
+        exit(1);
+    }
+
     tower_create(&t, n);
     tower_solve(d, &t, n, &t.a, &t.c, &t.b);
     tower_destroy(&t);
