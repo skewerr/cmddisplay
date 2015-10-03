@@ -6,9 +6,6 @@
 #include "cmddisplay.h"
 #include "cmdmisc.h"
 
-static const char EMPTY_CHAR  = ' ';
-static const char FILL_CHAR   = 219;
-
 
 void
 display_create (display *d, int width, int height)

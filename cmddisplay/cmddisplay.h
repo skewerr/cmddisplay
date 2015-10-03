@@ -1,6 +1,9 @@
 #ifndef CMDDISPLAY_H
 #define CMDDISPLAY_H
 
+static const char EMPTY_CHAR  = ' ';
+static const char FILL_CHAR   = 219;
+
 typedef struct {
     int height, width;
     char *screen;
