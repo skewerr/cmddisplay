@@ -13,9 +13,18 @@ main (void)
     draw_line(&scr, 50, 10, 3, 6);
 
     display_show(&scr);
-    sleep(2);
+    sleep(1);
 
     fill_boundary_fill(&scr, 20, 12);
+    display_show(&scr);
+    sleep(1);
+
+    display_clear(&scr);
+    draw_circumference(&scr, 40, 15, 4);
+    display_show(&scr);
+    sleep(1);
+
+    draw_circumference(&scr, 40, 15, 8);
     display_show(&scr);
 
     display_destroy(&scr);
