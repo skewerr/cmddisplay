@@ -94,34 +94,34 @@ draw_sprite (display *d, char *path, int x, int y)
 void
 draw_line (display *d, int x1, int y1, int x2, int y2)
 {
-    if (x1 == x2)                           // Vertical line.
+    if (x1 == x2)
     {
-        draw_line_v(d, x1, y1, y2);         // x is constant.
+        draw_line_v(d, x1, y1, y2);
         return;
     }
-    else if (y1 == y2)                      // Horizontal line.
+    else if (y1 == y2)
     {
-        draw_line_h(d, y1, x1, x2);         // y is constant.
+        draw_line_h(d, y1, x1, x2);
         return;
     }
 
-    float m = (float) (y2 - y1)/(x2 - x1);  // Angular coefficient.
-    float n = y1 - m*x1;                    // Linear coefficient.
+    float m = (float) (y2 - y1)/(x2 - x1);
+    float n = y1 - m*x1;
 
     if (fabs(m) < 1)
-        draw_line_c1(d, x1, x2, m, n);      // Vertical candidates.
+        draw_line_c1(d, x1, x2, m, n);
 
     else if (fabs(m) > 1)
-        draw_line_c2(d, y1, y2, m, n);      // Horizontal candidates.
+        draw_line_c2(d, y1, y2, m, n);
 
     else
     {
-        if (x1 > x2)                        // If the angular coef. is 1
-            switch_value(&x1, &x2);         // we should waste no more
-                                            // processing power trying to
-        int i;                              // rasterize the line segment.
+        if (x1 > x2)
+            switch_value(&x1, &x2);
+
+        int i;
         for (i = x1; i <= x2; i++)
-            display_paint(d, i, i + n);     // Just (x, x + n).
+            display_paint(d, i, i + n);
     }
 }
 
