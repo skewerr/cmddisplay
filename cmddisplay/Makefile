@@ -2,8 +2,8 @@ CC=gcc
 AR=ar
 RLIB=ranlib
 CFLAGS=-I.
-DEPS = cmddisplay.h cmddraw.h cmdclip.h cmdmisc.h
-OBJ = cmddisplay.o cmddraw.o cmdclip.o cmdmisc.o
+DEPS = cmddisplay.h cmddraw.h cmdclip.h cmdfill.h cmdmisc.h
+OBJ = cmddisplay.o cmddraw.o cmdclip.o cmdfill.o cmdmisc.o
 
 %.o: %.c $(DEPS)
 	$(CC) -o $@ -c $< $(CFLAGS)
