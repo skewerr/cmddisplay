@@ -4,7 +4,7 @@
 #include "cmddisplay.h"
 #include "cmddraw.h"
 #include "cmdclip.h"
-#include "misc.h"
+#include "cmdmisc.h"
 
 
 void

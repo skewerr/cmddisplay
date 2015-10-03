@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdarg.h>
 #include "cmddisplay.h"
-#include "misc.h"
+#include "cmdmisc.h"
 
 static const char EMPTY_CHAR  = ' ';
 static const char FILL_CHAR   = 219;

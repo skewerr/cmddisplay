@@ -4,7 +4,7 @@
 #include <stdio.h>
 #endif
 
-#include "misc.h"
+#include "cmdmisc.h"
 
 void
 set_cursor (int x, int y)
