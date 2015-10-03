@@ -1,7 +1,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include "cmddisplay.h"
 #include "cmddraw.h"
 #include "cmdclip.h"
