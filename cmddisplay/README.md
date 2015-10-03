@@ -24,7 +24,7 @@ going to try and implement different algorithms.
 `cmddraw.h|c` will use these to clip shapes and save processing
 power, if possible. Now like we'd need to right now, but still.
 
-## misc.h and misc.c
+## cmdmisc.h and cmdmisc.c
 
 Has functions used by other units in this folder. They're not
 really to do with the display, but are still useful to have.
