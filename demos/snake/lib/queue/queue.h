@@ -1,8 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <stdbool.h>
-
 typedef struct {
     int x, y;
 } pos;
@@ -29,8 +27,8 @@ pos  queue_start    (queue *q);
 int  queue_size     (queue *q);
 int  queue_length   (queue *q);
 
-bool queue_is_empty (queue *q);
-bool queue_is_full  (queue *q);
+int queue_is_empty  (queue *q);
+int queue_is_full   (queue *q);
 
 pos position        (int x, int y);
 

@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <time.h>
 #include "queue.h"
 
+#define true    1
+#define false   0
 
-// Operation functions.
+
+/* Operation functions. */
 
 
 void
@@ -146,24 +148,24 @@ queue_join (queue *q, queue *r)
 }
 
 
-// Verification functions.
+/* Verification functions. */
 
 
-bool
+int
 queue_is_empty (queue *q)
 {
     return !(q->length);
 }
 
 
-bool
+int
 queue_is_full (queue *q)
 {
     return q->length == q->size;
 }
 
 
-// Other functions.
+/* Other functions. */
 
 
 pos
