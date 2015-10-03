@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "cmddisplay.h"
 #include "cmddraw.h"
 #include "cmdclip.h"
@@ -24,6 +25,44 @@ draw_wire_rectangle (display *d, int x1, int y1, int x2, int y2)
     draw_line(d, x1, y1, x2, y1);
     draw_line(d, x1, y2, x2, y2);
     draw_line(d, x2, y1, x2, y2);
+}
+
+
+void
+draw_circumference (display *d, int x, int y, int radius)
+{
+    display_paint(d, x + radius, y);
+    display_paint(d, x, y + radius);
+    display_paint(d, x - radius, y);
+    display_paint(d, x, y - radius);
+
+    int i = radius, j = 0;
+    for (;;)
+    {
+        float m = (float) j/i;
+
+        if (m >= 1)
+            break;
+
+        float a1 = fabs(pow(radius, 2) - (pow(i, 2) + pow(j+1, 2)));
+        float a2 = fabs(pow(radius, 2) - (pow(i-1, 2) + pow(j, 2)));
+        float a3 = fabs(pow(radius, 2) - (pow(i-1, 2) + pow(j+1, 2)));
+
+        if (a1 <= a2 && a1 <= a3)
+            display_paint(d, x + i, y + ++j);
+        else if (a2 <= a3)
+            display_paint(d, x + --i, y + j);
+        else
+            display_paint(d, x + --i, y + ++j);
+        
+        display_paint(d, x+j, y+i);
+        display_paint(d, x-j, y+i);
+        display_paint(d, x-i, y+j);
+        display_paint(d, x-i, y-j);
+        display_paint(d, x-j, y-i);
+        display_paint(d, x+j, y-i);
+        display_paint(d, x+i, y-j);
+    }
 }
 
 
