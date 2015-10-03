@@ -25,7 +25,7 @@ static int g_sleep;
 void
 game_over (display *d)
 {
-    draw_sprite(d, "f/over", 12, 5);
+    display_puts(d, 25, d->height-13, "GAME  OVER");
     display_show(d);
     exit(0);
 }
