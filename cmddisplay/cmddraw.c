@@ -2,9 +2,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "cmddisplay.h"
+#include "cmdqueue.h"
 #include "cmddraw.h"
 #include "cmdclip.h"
 #include "cmdmisc.h"
+#include "cmdobj.h"
+
+
+void
+draw_polygon (display *d, polygon *p)
+{
+    pos a, b;
+    int i;
+
+    if (p->ver.length < 3)
+    {
+        printf("ERROR: Attempt to draw invalid polygon.\n");
+        return;
+    }
+
+    a = v_queue_dequeue(&p->ver);
+
+    for (i = 0; i < p->ver.length + 1; i++)
+    {
+        b = a;
+        a = v_queue_dequeue(&p->ver);
+
+        v_queue_enqueue(&p->ver, b);
+
+        draw_line(d, a.x, a.y, b.x, b.y);
+    }
+
+    v_queue_enqueue(&p->ver, a);
+}
 
 
 void
