@@ -9,6 +9,13 @@
 #include "cmdobj.h"
 
 
+/* Prototypes. */
+static void draw_line_c1    (display *d, int x1, int x2, float m, float n);
+static void draw_line_c2    (display *d, int y1, int y2, float m, float n);
+static void draw_line_h     (display *d, int y, int x1, int x2);
+static void draw_line_v     (display *d, int x, int y1, int y2);
+
+
 void
 draw_polygon (display *d, polygon *p)
 {
@@ -151,7 +158,7 @@ draw_line (display *d, int x1, int y1, int x2, int y2)
 
         int i;
         for (i = x1; i <= x2; i++)
-            display_paint(d, i, i + n);
+            display_paint(d, i, ((m > 0) ? 1:-1)*i + n);
     }
 }
 
