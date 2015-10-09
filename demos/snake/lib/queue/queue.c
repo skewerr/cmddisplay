@@ -84,7 +84,7 @@ queue_empty (queue *q)
 void
 queue_fill (queue *q)
 {
-    static bool seeded = false;
+    static int seeded = false;
 
     if (!seeded)
     {
