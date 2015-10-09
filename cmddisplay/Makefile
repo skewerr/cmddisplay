@@ -6,7 +6,7 @@ DEPS = cmddisplay.h cmddraw.h cmdclip.h cmdfill.h cmdobj.h cmdmisc.h cmdqueue.h
 OBJ = cmddisplay.o cmddraw.o cmdclip.o cmdfill.o cmdobj.o cmdmisc.o cmdqueue.o
 
 %.o: %.c $(DEPS)
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS) -lm
 
 libcmddisplay.a: $(OBJ)
 	$(AR) -cvq $@ $^
