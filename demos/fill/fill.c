@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <cmddisplay.h>
 #include <cmddraw.h>
+#include <cmdfill.h>
 
 int
 main (void)

@@ -6,6 +6,7 @@
 
 #include <time.h>
 #include <math.h>
+#include <stdlib.h>
 #include <cmddisplay.h>
 #include <cmdqueue.h>
 #include <cmddraw.h>
@@ -17,7 +18,7 @@ main (void)
     display scr;
     polygon p;
 
-    display_create(&scr, 80, 50);
+    display_create(&scr, 80, 35);
     obj_pol_create(&p, 5);
     srand(time(NULL));
 
