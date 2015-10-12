@@ -6,20 +6,20 @@
 #define false   0
 
 void
-obj_pol_create (polygon *p, int faces)
+pol_create (polygon *p, int faces)
 {
     v_queue_create(&p->ver, faces);
     p->filled = false;
 }
 
 void
-obj_pol_destroy (polygon *p)
+pol_destroy (polygon *p)
 {
     v_queue_destroy(&p->ver);
 }
 
 void
-obj_pol_add_vertex (polygon *p, int x, int y)
+pol_add_vertex (polygon *p, int x, int y)
 {
     pos v;
     v.x = x;
