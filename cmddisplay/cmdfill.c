@@ -6,7 +6,7 @@ fill_boundary_fill (display *d, int x, int y)
 {
     if (x < 0 || x >= d->width
         || y < 0 || y >= d->height
-        || d->screen[y*d->width + x] != EMPTY_CHAR)
+        || display_getc(d, x, y) != EMPTY_CHAR)
         return;
 
     display_paint(d, x, y);
