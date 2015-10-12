@@ -5,6 +5,8 @@
 #define true    1
 #define false   0
 
+/* Polygons. */
+
 void
 pol_create (polygon *p, int faces)
 {
@@ -29,4 +31,28 @@ pol_add_vertex (polygon *p, int x, int y)
         v_queue_dequeue(&p->ver);
 
     v_queue_enqueue(&p->ver, v);
+}
+
+/* Circumferences. */
+
+void
+circ_create (circumference *c, int x, int y, int rad)
+{
+    c->center.x = x;
+    c->center.y = y;
+    c->rad      = rad;
+    c->filled   = false;
+}
+
+void
+circ_set_center (circumference *c, int x, int y)
+{
+    c->center.x = x;
+    c->center.y = y;
+}
+
+void
+circ_set_radius (circumference *c, int rad)
+{
+    c->rad = rad;
 }
