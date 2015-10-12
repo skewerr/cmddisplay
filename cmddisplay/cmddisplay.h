@@ -18,5 +18,6 @@ void display_clear      (display *d);
 void display_destroy    (display *d);
 
 void display_puts       (display *d, int x, int y, char *fmt, ...);
+char display_getc       (display *d, int x, int y);
 
 #endif

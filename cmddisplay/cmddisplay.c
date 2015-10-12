@@ -20,6 +20,18 @@ display_create (display *d, int width, int height)
 }
 
 
+char
+display_getc (display *d, int x, int y)
+{
+    if (x >= 0 && x < d->width
+        && y >= 0 && y < d->height)
+        return d->screen[y*d->width + x];
+
+    else
+        return EMPTY_CHAR;
+}
+
+
 void
 display_puts (
     display *d,
