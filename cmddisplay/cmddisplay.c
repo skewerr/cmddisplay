@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include <stdarg.h>
 #include "cmddisplay.h"
 #include "cmdmisc.h"
+
+#define true    1
+#define false   0
 
 
 void
@@ -86,7 +88,7 @@ display_empty (display *d, int x, int y)
 void
 display_show (display *d)
 {
-    static bool cleared = false;
+    static int cleared = false;
 
     if (!cleared)
     {
