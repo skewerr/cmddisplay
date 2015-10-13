@@ -14,7 +14,7 @@ typedef struct {
 void pol_create         (polygon *p, int faces);
 void pol_destroy        (polygon *p);
 
-void pol_add_vertex	    (polygon *p, int x, int y);
+void pol_add_vertex	    (polygon *p, double x, double y);
 
 /* Circumferences. */
 

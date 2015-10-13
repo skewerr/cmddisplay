@@ -37,7 +37,7 @@ draw_polygon (display *d, polygon *p)
 
         v_queue_enqueue(&p->ver, b);
 
-        draw_line(d, a.x, a.y, b.x, b.y);
+        draw_line(d, round_d(a.x), round_d(a.y), round_d(b.x), round_d(b.y));
     }
 
     v_queue_enqueue(&p->ver, a);

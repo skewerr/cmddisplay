@@ -215,7 +215,7 @@ v_queue_print (v_queue *q)
 
 
 pos
-position (int x, int y)
+position (double x, double y)
 {
     pos p;
     p.x = x; p.y = y;

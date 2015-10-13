@@ -4,7 +4,7 @@
 #include "cmdtrf.h"
 
 void
-pol_translate (polygon *p, int tx, int ty)
+pol_translate (polygon *p, double tx, double ty)
 {
     int i;
     for (i = 0; i < p->ver.length; i++)
@@ -17,7 +17,7 @@ pol_translate (polygon *p, int tx, int ty)
 }
 
 void
-pol_scale (polygon *p, int ex, int ey, int fx, int fy)
+pol_scale (polygon *p, double ex, double ey, double fx, double fy)
 {
     pol_translate(p, -fx, -fy);
 
@@ -34,22 +34,22 @@ pol_scale (polygon *p, int ex, int ey, int fx, int fy)
 }
 
 void
-pol_rotate (polygon *p, float deg, int fx, int fy)
+pol_rotate (polygon *p, double deg, double fx, double fy)
 {
     pol_translate(p, -fx, -fy);
 
-    double r_deg = deg * M_PI / 180;
+    deg *= M_PI / 180;
     
     int i;
     for (i = 0; i < p->ver.length; i++)
     {
         pos t_ver = v_queue_dequeue(&p->ver);
 
-        float nx = t_ver.x*cos(r_deg) - t_ver.y*sin(r_deg);
-        float ny = t_ver.x*sin(r_deg) + t_ver.y*cos(r_deg);
+        double nx = t_ver.x*cos(deg) - t_ver.y*sin(deg);
+        double ny = t_ver.x*sin(deg) + t_ver.y*cos(deg);
         
-        t_ver.x = (long) (nx + ((nx > 0) ? 0.5:-0.5));
-        t_ver.y = (long) (ny + ((ny > 0) ? 0.5:-0.5));
+        t_ver.x = nx;
+        t_ver.y = ny;
         
         v_queue_enqueue(&p->ver, t_ver);
     }

@@ -2,7 +2,7 @@
 #define CMDQUEUE_H
 
 typedef struct {
-    int x, y;
+    double x, y;
 } pos;
 
 typedef struct {
@@ -30,6 +30,6 @@ int  v_queue_length   (v_queue *q);
 int  v_queue_is_empty (v_queue *q);
 int  v_queue_is_full  (v_queue *q);
 
-pos  position         (int x, int y);
+pos  position         (double x, double y);
 
 #endif
