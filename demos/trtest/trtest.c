@@ -11,12 +11,12 @@
 int
 main(void)
 {
-	display sc;
+    display sc;
     polygon p;
     pos c;
 
-	display_create(&sc, 120, 30);
-	pol_create(&p, 5);
+    display_create(&sc, 120, 30);
+    pol_create(&p, 5);
 
     pol_add_vertex(&p, 20, 5);
     pol_add_vertex(&p, 25, 5);
@@ -46,5 +46,5 @@ main(void)
         usleep(15000);
     }
 
-	display_destroy(&sc);
+    display_destroy(&sc);
 }
