@@ -6,6 +6,7 @@
 #include "cmddraw.h"
 #include "cmdclip.h"
 #include "cmdmisc.h"
+#include "cmdfill.h"
 #include "cmdobj.h"
 
 
@@ -61,6 +62,16 @@ draw_wire_rectangle (display *d, int x1, int y1, int x2, int y2)
     draw_line(d, x1, y1, x2, y1);
     draw_line(d, x1, y2, x2, y2);
     draw_line(d, x2, y1, x2, y2);
+}
+
+
+void
+draw_circumference_obj (display *d, circumference *c)
+{
+    draw_circumference(d, c->center.x, c->center.y, c->rad);
+
+    if (c->filled)
+        fill_boundary_fill(d, c->center.x, c->center.y);
 }
 
 

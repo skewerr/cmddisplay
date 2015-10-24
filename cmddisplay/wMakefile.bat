@@ -1,7 +1,7 @@
 @ECHO off
 
 set PATH=%PATH%;C:\MinGW\bin
-set OBJ=cmddisplay.o cmddraw.o cmdclip.o cmdfill.o cmdobj.o cmdmisc.o cmdqueue.o
+set OBJ=cmddisplay.o cmddraw.o cmdclip.o cmdfill.o cmdobj.o cmdmisc.o cmdqueue.o cmdtrf.o
 
 if /I "%1" == "default" goto :default
 if /I "%1" == "install" goto :install
@@ -17,6 +17,7 @@ for %%A in (
     cmdfill.c,
     cmdqueue.c,
     cmdobj.c,
+    cmdtrf.c,
     cmdmisc.c
 ) do gcc -c %%A
 

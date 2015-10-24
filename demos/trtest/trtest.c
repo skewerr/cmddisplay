@@ -7,6 +7,12 @@
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
+#include <conio.h>
+
+#define UP      72
+#define LEFT    75
+#define RIGHT   77
+#define DOWN    80
 
 int
 main(void)
@@ -15,8 +21,8 @@ main(void)
     polygon p;
     pos c;
 
-    display_create(&sc, 120, 30);
-    pol_create(&p, 5);
+    display_create(&sc, 160, 100);
+    pol_create(&p, 7);
 
     pol_add_vertex(&p, 20, 5);
     pol_add_vertex(&p, 25, 5);
@@ -28,11 +34,11 @@ main(void)
     srand(time(NULL));
 
     pol_scale(&p, 3, 3, c.x, c.y);
-    pol_translate(&p, 20, 4);
-    c.x += 20;
-    c.y += 4;
+    pol_translate(&p, 30, 14);
+    c.x += 30;
+    c.y += 14;
 
-    int i;
+    int i; char dir = 0;
     for(i = 0;;i++)
     {
         draw_polygon(&sc, &p);
@@ -43,6 +49,21 @@ main(void)
 
         display_put_raw(&sc, c.x, c.y, 'C');
 
+        while (kbhit())
+            dir = getch();
+
+        switch (dir)
+        {
+            case UP: c.y++; break;
+            case DOWN: c.y--; break;
+            case RIGHT: c.x++; break;
+            case LEFT: c.x--; break;
+            case 'a': pol_add_vertex(&p, c.x, c.y); break;
+            case 'h': pol_rotate(&p, 5, c.x, c.y); break;
+            case 'r': pol_rotate(&p, -5, c.x, c.y); break;
+        }
+        
+        dir = 0;
         usleep(15000);
     }
 

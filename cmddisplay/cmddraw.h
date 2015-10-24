@@ -9,6 +9,7 @@ void draw_solid_rectangle   (display *d, int x1, int y1, int x2, int y2);
 void draw_wire_rectangle    (display *d, int x1, int y1, int x2, int y2);
 void draw_circumference     (display *d, int x, int y, int radius);
 void draw_sprite            (display *d, char *path, int x, int y);
+void draw_circumference_obj (display *d, circumference *c);
 void draw_polygon           (display *d, polygon *p);
 
 /*
