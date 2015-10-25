@@ -1,9 +1,7 @@
 cmddisplay
 ===========
 
-A set of uh... libraries? I don't know, headers that can be
-included and are implemented, those are libraries, right?
-Whatever you want to call these, I don't care.
+A library for making 2D displays in the command line. Yay!
 
 I initially made these for some guys who wanted to make a
 game in C, in the command line, but weren't really comfortable
@@ -15,10 +13,5 @@ has nothing like a game engine and its only purpose is to
 create command-line displays and do some other "graphical"
 things with it.
 
-I decided to rewrite it and this is my attempt at doing so. I
-actually need to work on a Java thing for school, but I didn't
-feel inclined to use that language this week, so... fuck.
-
-K bye.
-
--spoonm
+I decided to rewrite it yet again and this is my attempt at doing
+so. 
