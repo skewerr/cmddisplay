@@ -1,12 +1,18 @@
 CC=gcc
-AR=ar
-RLIB=ranlib
+CFLAGS=-Iinclude -Llib
+LDLIBS=-lstack -lcmddisplay -lm
 
-target:
-	$(CC) -o lib/stack/stack.o -c lib/stack/stack.c
-	$(AR) -cvq lib/libstack.a lib/stack/stack.o
-	$(RLIB) lib/libstack.a
-	$(CC) -o hanoi hanoi.c tower.c -Iinclude -Llib -lstack -lcmddisplay -lm
+SOURCE=hanoi.c tower.c
 
+lib/stack.o: lib/stack/stack.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+lib/libstack.a: lib/stack.o
+	$(AR) $(ARFLAGS) $@ $<
+
+hanoi: lib/libstack.a
+	$(CC) $(CFLAGS) $(SOURCE) $(LDLIBS) -o $@
+
+.PHONY: clean
 clean:
-	rm lib/stack/*.o
+	$(RM) lib/*.o

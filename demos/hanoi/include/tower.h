@@ -1,5 +1,5 @@
-#ifndef TOWER_H
-#define TOWER_H
+#ifndef _TOWER_H
+#define _TOWER_H
 
 #include <stack.h>
 
@@ -7,10 +7,10 @@ typedef struct {
     stack a, b, c;
 } tower;
 
-void tower_create   (tower *t, int size);
-void tower_destroy  (tower *t);
-void tower_print    (tower *t);
+void tower_create(tower *, int);
+void tower_destroy(tower *);
 
-void tower_move     (stack *s, stack *t);
+void tower_print(tower *);
+void tower_move(stack *, stack *);
 
 #endif

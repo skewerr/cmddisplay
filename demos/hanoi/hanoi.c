@@ -4,10 +4,10 @@
 #include <unistd.h>
 #endif
 
+#include <cmddisplay/display.h>
+#include <cmddisplay/draw.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <cmddisplay.h>
-#include <cmddraw.h>
 #include <stack.h>
 #include <tower.h>
 
@@ -15,7 +15,7 @@ unsigned int g_sleep = 15;
 
 
 void
-fill_discs (display *d, stack *s, int x)
+fill_discs(display *d, stack *s, int x)
 {
     if (stack_is_empty(s))
         return;
@@ -28,7 +28,7 @@ fill_discs (display *d, stack *s, int x)
 
 
 void
-draw_tower (display *d, tower *t)
+draw_tower(display *d, tower *t)
 {
     draw_line(d, 0, 0, d->width-1, 0);
     draw_line(d,   d->width/4, 0,   d->width/4, d->height-13);
@@ -42,7 +42,7 @@ draw_tower (display *d, tower *t)
 
 
 void
-tower_move_a (display *d, tower *t, stack *a, stack *b)
+tower_move_a(display *d, tower *t, stack *a, stack *b)
 {
     static int move_count = 0;
 
@@ -113,7 +113,7 @@ tower_move_a (display *d, tower *t, stack *a, stack *b)
 
 
 void
-tower_solve (
+tower_solve(
     display *d, tower *t, int n,
     stack *a, stack *b, stack *c)
 {
@@ -130,7 +130,7 @@ tower_solve (
 
 
 void
-tower_play (display *d, tower *t)
+tower_play(display *d, tower *t)
 {
     int move;
 
@@ -162,7 +162,7 @@ tower_play (display *d, tower *t)
 
 
 void
-tower_start (display *d)
+tower_start(display *d)
 {
     tower t;
     int n, p;
@@ -193,7 +193,7 @@ tower_start (display *d)
 
 
 int
-main (int argc, char **argv)
+main(int argc, char **argv)
 {
     display d;
     display_create(&d, 120, 30);

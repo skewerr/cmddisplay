@@ -9,24 +9,24 @@ typedef struct {
     int *content;
 } stack;
 
-void stack_create   (stack *s, int size);
-void stack_resize   (stack *s, int size);
-void stack_push     (stack *s, int data);
-int  stack_pop      (stack *s);
+void stack_create(stack *, int);
+void stack_resize(stack *, int);
+void stack_push(stack *, int);
+int  stack_pop(stack *);
 
-void stack_copy     (stack *s, stack *t);
-void stack_join     (stack *s, stack *t);
-void stack_empty    (stack *s);
-void stack_fill     (stack *s);
-void stack_invert   (stack *s);
-void stack_destroy  (stack *s);
+void stack_copy(stack *, stack *);
+void stack_join(stack *, stack *);
+void stack_empty(stack *);
+void stack_fill(stack *);
+void stack_invert(stack *);
+void stack_destroy(stack *);
 
-void stack_print    (stack *s);
+void stack_print(stack *);
 
-int  stack_top      (stack *s);
-int  stack_size     (stack *s);
+int  stack_top(stack *);
+int  stack_size(stack *);
 
-bool stack_is_empty (stack *s);
-bool stack_is_full  (stack *s);
+bool stack_is_empty(stack *);
+bool stack_is_full(stack *);
 
 #endif

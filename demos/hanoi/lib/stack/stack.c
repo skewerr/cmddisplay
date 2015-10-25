@@ -9,7 +9,7 @@
 
 
 void
-stack_create (stack *s, int size)
+stack_create(stack *s, int size)
 {
     s->top      = 0;
     s->size     = size;
@@ -18,7 +18,7 @@ stack_create (stack *s, int size)
 
 
 void
-stack_resize (stack *s, int size)
+stack_resize(stack *s, int size)
 {
     if (s->size == size)
         return;
@@ -32,7 +32,7 @@ stack_resize (stack *s, int size)
 
 
 void
-stack_push (stack *s, int data)
+stack_push(stack *s, int data)
 {
     if (stack_is_full(s))
     {
@@ -45,7 +45,7 @@ stack_push (stack *s, int data)
 
 
 int
-stack_pop (stack *s)
+stack_pop(stack *s)
 {
     if (stack_is_empty(s))
     {
@@ -58,14 +58,14 @@ stack_pop (stack *s)
 
 
 void
-stack_empty (stack *s)
+stack_empty(stack *s)
 {
     while (!stack_is_empty(s))
         stack_pop(s);
 }
 
 void
-stack_fill (stack *s)
+stack_fill(stack *s)
 {
     static bool seeded = false;
 
@@ -81,7 +81,7 @@ stack_fill (stack *s)
 
 
 void
-stack_copy (stack *s, stack *t)
+stack_copy(stack *s, stack *t)
 {
     stack u;
 
@@ -104,7 +104,7 @@ stack_copy (stack *s, stack *t)
 
 
 void
-stack_join (stack *s, stack *t)
+stack_join(stack *s, stack *t)
 {
     stack u;
 
@@ -122,7 +122,7 @@ stack_join (stack *s, stack *t)
 
 
 void
-stack_invert (stack *s)
+stack_invert(stack *s)
 {
     stack t;
     stack_create(&t, s->size);
@@ -138,7 +138,7 @@ stack_invert (stack *s)
 
 
 void
-stack_destroy (stack *s)
+stack_destroy(stack *s)
 {
     free(s->content);
 }
@@ -148,14 +148,14 @@ stack_destroy (stack *s)
 
 
 bool
-stack_is_empty (stack *s)
+stack_is_empty(stack *s)
 {
     return !(s->top);
 }
 
 
 bool
-stack_is_full (stack *s)
+stack_is_full(stack *s)
 {
     return s->top == s->size;
 }
@@ -165,7 +165,7 @@ stack_is_full (stack *s)
 
 
 int
-stack_top (stack *s)
+stack_top(stack *s)
 {
     if (stack_is_empty(s))
     {
@@ -178,14 +178,14 @@ stack_top (stack *s)
 
 
 int
-stack_size (stack *s)
+stack_size(stack *s)
 {
     return s->size;
 }
 
 
 void
-stack_print (stack *s)
+stack_print(stack *s)
 {
     if (stack_is_empty(s))
     {
