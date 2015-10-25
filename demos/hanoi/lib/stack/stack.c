@@ -5,7 +5,7 @@
 #include "stack.h"
 
 
-// Operation functions.
+/* Operation functions. */
 
 
 void
@@ -13,7 +13,13 @@ stack_create(stack *s, int size)
 {
     s->top      = 0;
     s->size     = size;
-    s->content  = (int*) malloc(size * sizeof(int));
+    s->content  = malloc(size * sizeof(int));
+
+    if (s->content == NULL)
+    {
+        fprintf(stderr, "ERROR: Error allocating memory for stack.\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 
@@ -27,7 +33,13 @@ stack_resize(stack *s, int size)
         s->top = size;
 
     s->size     = size;
-    s->content  = (int*) realloc(s->content, size * sizeof(int));
+    s->content  = realloc(s->content, size * sizeof(int));
+
+    if (s->content == NULL)
+    {
+        fprintf(stderr, "ERROR: Error allocating memory to resize stack block.\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 
@@ -36,7 +48,7 @@ stack_push(stack *s, int data)
 {
     if (stack_is_full(s))
     {
-        printf("ERROR: Stack overflow attempt. (push %d)\n", data);
+        fprintf(stderr, "ERROR: Stack overflow attempt. (push %d)\n", data);
         return;
     }
 
@@ -49,7 +61,7 @@ stack_pop(stack *s)
 {
     if (stack_is_empty(s))
     {
-        printf("ERROR: Empty stack. (pop)\n");
+        fprintf(stderr, "ERROR: Empty stack. (pop)\n");
         return 0;
     }
 
@@ -144,7 +156,7 @@ stack_destroy(stack *s)
 }
 
 
-// Verification functions.
+/* Verification functions. */
 
 
 bool
@@ -161,7 +173,7 @@ stack_is_full(stack *s)
 }
 
 
-// Other functions.
+/* Other functions. */
 
 
 int
@@ -169,7 +181,7 @@ stack_top(stack *s)
 {
     if (stack_is_empty(s))
     {
-        printf("ERROR: Empty stack. (top)\n");
+        fprintf(stderr, "ERROR: Empty stack. (top)\n");
         return 0;
     }
 
