@@ -1,20 +1,27 @@
+prefix=/usr/local
+
 CC=gcc
-AR=ar
-RLIB=ranlib
 CFLAGS=-I.
-DEPS = cmddisplay.h cmddraw.h cmdclip.h cmdfill.h cmdobj.h cmdtrf.h cmdmisc.h cmdqueue.h
-OBJ = cmddisplay.o cmddraw.o cmdclip.o cmdfill.o cmdobj.o cmdtrf.o cmdmisc.o cmdqueue.o
+LDLIBS=-lm
 
-%.o: %.c $(DEPS)
-	$(CC) -o $@ -c $< $(CFLAGS) -lm
+OBJECTS=display.o draw.o misc.o
+INCLUDES=display.h draw.h misc.h
 
-libcmddisplay.a: $(OBJ)
-	$(AR) -cvq $@ $^
-	$(RLIB) $@
+# Compilation.
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Archiving into static library file.
+libcmddisplay.a: $(OBJECTS)
+	$(AR) $(ARFLAGS) $@ $^
+
+# These aren't file targets.
+.PHONY: install clean
 
 install:
-	mv libcmddisplay.a /usr/local/lib
-	cp *.h /usr/local/include
+	install -d $(prefix)/lib $(prefix)/include/cmddisplay
+	install -m 0644 libcmddisplay.a $(prefix)/lib
+	install -m 0644 *.h $(prefix)/include/cmddisplay
 
 clean:
-	rm *.o
+	$(RM) *.o
