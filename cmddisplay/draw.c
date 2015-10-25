@@ -16,6 +16,8 @@
  * draw_line - used to draw lines in a display, given coordinates.
  * draw_file - used to load file contents into a display. Starts
  *     at given (x,y) coordinates.
+ * draw_circumference - used to draw circumferences in a display,
+ *     given center coordinates and radius.
  *
  * Static functions:
  *
@@ -31,6 +33,55 @@ static void draw_line_h(display *, int, int, int);
 static void draw_line_v(display *, int, int, int);
 static void draw_line_c1(display *, int, int, float, float);
 static void draw_line_c2(display *, int, int, float, float);
+
+
+void
+draw_circumference(display *d, int x, int y, unsigned int radius)
+{
+    float m;
+    int i, j;
+
+    if (radius == 0)
+    {
+        display_fill(d, x, y);
+        return;
+    }
+
+    display_fill(d, x + radius, y);
+    display_fill(d, x, y + radius);
+    display_fill(d, x - radius, y);
+    display_fill(d, x, y - radius);
+
+    i = radius;
+    j = 0;
+
+    for (;;)
+    {
+        m = (float) j/i;
+
+        if (m >= 1)
+            break;
+
+        float a1 = fabs(pow(radius, 2) - (pow(i, 2) + pow(j+1, 2)));
+        float a2 = fabs(pow(radius, 2) - (pow(i-1, 2) + pow(j, 2)));
+        float a3 = fabs(pow(radius, 2) - (pow(i-1, 2) + pow(j+1, 2)));
+
+        if (a1 <= a2 && a1 <= a3)
+            display_fill(d, x + i, y + ++j);
+        else if (a2 <= a3)
+            display_fill(d, x + --i, y + j);
+        else
+            display_fill(d, x + --i, y + ++j);
+        
+        display_fill(d, x+j, y+i);
+        display_fill(d, x-j, y+i);
+        display_fill(d, x-i, y+j);
+        display_fill(d, x-i, y-j);
+        display_fill(d, x-j, y-i);
+        display_fill(d, x+j, y-i);
+        display_fill(d, x+i, y-j);
+    }
+}
 
 
 void

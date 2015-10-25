@@ -5,5 +5,6 @@
 
 void draw_line(display *, int, int, int, int);
 void draw_file(display *, int, int, char *);
+void draw_circumference(display *, int, int, unsigned int);
 
 #endif
