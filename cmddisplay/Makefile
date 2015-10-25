@@ -4,8 +4,8 @@ CC=gcc
 CFLAGS=-I.
 LDLIBS=-lm
 
-OBJECTS=display.o draw.o misc.o
-INCLUDES=display.h draw.h misc.h
+OBJECTS=display.o draw.o clip.o misc.o
+INCLUDES=display.h draw.h clip.h misc.h
 
 # Compilation.
 %.o: %.c

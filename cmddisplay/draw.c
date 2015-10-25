@@ -2,6 +2,7 @@
 #include <math.h>
 
 #include "draw.h"
+#include "clip.h"
 #include "misc.h"
 
 /*
@@ -31,6 +32,9 @@ draw_line(display *d, int x1, int y1, int x2, int y2)
 {
     float m = ((x2 - x1) ? (float) (y2 - y1)/(x2 - x1) : 0.0f);
     float n = y1 - m*x1;
+
+    if (clip_line(d, &x1, &y1, &x2, &y2))
+        return;
 
     if (x1 == x2)
         draw_line_v(d, x1, y1, y2);
