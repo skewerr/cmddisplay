@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 #include "draw.h"
@@ -13,6 +14,11 @@
  * The functions here are the following:
  *
  * draw_line - used to draw lines in a display, given coordinates.
+ * draw_file - used to load file contents into a display. Starts
+ *     at given (x,y) coordinates.
+ *
+ * Static functions:
+ *
  * draw_line_h - used to draw horizontal lines in a display.
  * draw_line_v - used to draw vertical lines in a display.
  * draw_line_c1 - used to draw lines with vertical candidate pixels.
@@ -25,6 +31,37 @@ static void draw_line_h(display *, int, int, int);
 static void draw_line_v(display *, int, int, int);
 static void draw_line_c1(display *, int, int, float, float);
 static void draw_line_c2(display *, int, int, float, float);
+
+
+void
+draw_file(display *d, int x, int y, char *path)
+{
+    FILE *fp;
+    int i;
+    char t;
+
+    if ((fp = fopen(path, "r")) == NULL)
+    {
+        fprintf(stderr, "ERROR: Error opening file %s.\n", path);
+        perror("\tError given");
+        exit(EXIT_FAILURE);
+    }
+
+    y = d->height - y - 1;
+
+    for (i = x; (t = fgetc(fp)) != EOF;)
+    {
+        if (t == '\n')
+        {
+            y--;
+            i = x;
+        }
+        else if (t != ' ')
+            display_putc(d, i++, y, t);
+        else
+            i++;
+    }
+}
 
 
 void

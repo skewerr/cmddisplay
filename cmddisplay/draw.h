@@ -4,5 +4,6 @@
 #include "display.h"
 
 void draw_line(display *, int, int, int, int);
+void draw_file(display *, int, int, char *);
 
 #endif
