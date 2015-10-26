@@ -1,8 +1,9 @@
 prefix=/usr/local
 
 CC=gcc
-CFLAGS=-I.
-LDLIBS=-lm
+
+override CFLAGS+=-I.
+override LDLIBS+=-lm
 
 OBJECTS=display.o draw.o clip.o misc.o
 INCLUDES=display.h draw.h clip.h misc.h
