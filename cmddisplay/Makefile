@@ -5,8 +5,8 @@ CC=gcc
 override CFLAGS+=-I.
 override LDLIBS+=-lm
 
-OBJECTS=display.o draw.o clip.o misc.o
-INCLUDES=display.h draw.h clip.h misc.h
+OBJECTS=display.o draw.o clip.o fill.o misc.o
+INCLUDES=display.h draw.h clip.h fill.h misc.h
 
 # Compilation.
 %.o: %.c
