@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <windows.h>
 
 #include "draw.h"
 #include "clip.h"
@@ -149,10 +150,15 @@ draw_line(display *d, int x1, int y1, int x2, int y2)
 static void
 draw_line_c1(display *d, int x1, int x2, float m, float n)
 {
-    int c1y = round_f(m*x1 + n);
-    int c2y = c1y + ((m > 0) ? 1:-1);
+    int c1y, c2y;
 
-    for (; x1 != x2; x1 += (x1 < x2) ? 1:-1)
+    if (x1 > x2)
+        misc_switch_val(&x1, &x2);
+
+    c1y = round_f(m*x1 + n);
+    c2y = c1y + ((m > 0) ? 1:-1);
+
+    for (; x1 < x2; x1++)
     {
         float dif1 = fabs(m*x1 + n - c1y);
         float dif2 = fabs(m*x1 + n - c2y);
@@ -172,10 +178,15 @@ draw_line_c1(display *d, int x1, int x2, float m, float n)
 static void
 draw_line_c2(display *d, int y1, int y2, float m, float n)
 {
-    int c1x = round_f((y1 - n)/m);
-    int c2x = c1x + ((m > 0) ? 1:-1);
+    int c1x, c2x;
 
-    for (; y1 != y2; y1 += (y1 < y2) ? 1:-1)
+    if (y1 > y2)
+        misc_switch_val(&y1, &y2);
+
+    c1x = round_f((y1 - n)/m);
+    c2x = c1x + ((m > 0) ? 1:-1);
+
+    for (; y1 < y2; y1++)
     {
         float dif1 = fabs((y1 - n)/m - c1x);
         float dif2 = fabs((y1 - n)/m - c2x);
