@@ -15,7 +15,7 @@ static const char EMPTY_CHAR = _EMPTY_CHAR;
 
 typedef struct {
     int width, height;
-    char *scr;
+    char *scr, *buf;
 } display;
 
 

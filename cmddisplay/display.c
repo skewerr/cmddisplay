@@ -27,12 +27,12 @@ display_create(display *d, int width, int height)
 {
     d->width = width;
     d->height = height;
-    d->scr = malloc(width*height);
+    d->buf = NULL;
 
-    if (d->scr == NULL)
+    if ((d->scr = malloc(width*height)) == NULL)
     {
         fprintf(stderr, "ERROR: Error allocating memory for a display.\n");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 
     display_clear(d);
@@ -42,6 +42,7 @@ void
 display_destroy(display *d)
 {
     free(d->scr);
+    free(d->buf);
 }
 
 
@@ -66,14 +67,14 @@ display_getc(display *d, int x, int y)
 void
 display_puts(display *d, int x, int y, char *fmt, ...)
 {
-    char *buf = malloc(d->width + 1);
     int tmpx, i;
+    char *buf;
 
-    if (buf == NULL)
+    if ((buf = malloc(d->width + 1)) == NULL)
     {
         fprintf(stderr, "ERROR: Error allocating memory for display_puts "
             "string buffer.\n");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 
     va_list ap;
@@ -131,19 +132,30 @@ display_clear(display *d)
 void
 display_show(display *d)
 {
+    int i, j;
+    char *buf, *lin, *stl;
+
     misc_clear_scr();
 
-    char *buf = malloc(d->height*(d->width + 1) + 1);
-    char *lin = malloc(d->width + 2);
-    char *stl = d->scr;
-    int i, j;
-
-    if (buf == NULL || lin == NULL)
+    if (d->buf == NULL)
     {
-        fprintf(stderr, "ERROR: Error allocating memory for display buffer "
-            "creation in display_show().\n");
-        exit(1);
+        if ((d->buf = malloc(d->height*(d->width + 1) + 1)) == NULL)
+        {
+            fprintf(stderr, "ERROR: Error allocating memory for display "
+                "buffer in display_show() call.\n");
+            exit(EXIT_FAILURE);
+        }
     }
+
+    if ((lin = malloc(d->width + 2)) == NULL)
+    {
+        fprintf(stderr, "ERROR: Error allocating memory for line buffer "
+            "creation in display_show() call.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    buf = d->buf;
+    stl = d->scr;
 
     *buf = *(lin + d->width + 1) = '\0';
     *(lin + d->width) = '\n';
@@ -159,6 +171,5 @@ display_show(display *d)
     misc_set_cursor(0,0);
     printf(buf);
 
-    free(buf);
     free(lin);
 }
