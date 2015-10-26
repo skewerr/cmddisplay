@@ -22,6 +22,8 @@ typedef struct {
 void display_create(display *, int, int);
 void display_destroy(display *);
 
+void display_gets(char *, int, display *, int, int);
+char display_getc(display *, int, int);
 void display_puts(display *, int, int, char *, ...);
 void display_putc(display *, int, int, char);
 void display_fill(display *, int, int);

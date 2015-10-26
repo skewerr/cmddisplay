@@ -12,6 +12,8 @@
  *
  * display_create - creates displays after receiving width and height.
  * display_destroy - frees memory previously used by a display.
+ * display_gets - reads a string from a display, given length and position.
+ * display_getc - reads a character from position (x,y) in a display.
  * display_puts - formats a string and puts it in a display in (x,y).
  * display_putc - puts a character at position (x,y) of a display.
  * display_fill - puts a FILL_CHAR at position (x,y) of a display.
@@ -40,6 +42,24 @@ void
 display_destroy(display *d)
 {
     free(d->scr);
+}
+
+
+void
+display_gets(char *str, int size, display *d, int x, int y)
+{
+    int i;
+
+    for (i = 0; (i < size - 1) && (x < d->width); i++)
+        *(str++) = display_getc(d, x++, y);
+
+    *str = '\0';
+}
+
+char
+display_getc(display *d, int x, int y)
+{
+    return *(d->scr + (d->height - y - 1)*d->width + x);
 }
 
 
