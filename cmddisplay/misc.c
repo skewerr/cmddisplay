@@ -26,7 +26,7 @@
 void
 misc_clear_scr(void)
 {
-    static short int cleared = false;
+    static short cleared = false;
 
     if(!cleared)
     {
