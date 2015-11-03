@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := hanoi
+
 CC=gcc
 CFLAGS=-Iinclude -Llib
 LDLIBS=-lstack -lcmddisplay -lm
