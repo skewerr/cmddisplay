@@ -1,17 +1,8 @@
 #ifndef _CMDDISPLAY_H
 #define _CMDDISPLAY_H
 
-#ifndef _FILL_CHAR
-static const char FILL_CHAR = 219;
-#else
-static const char FILL_CHAR = _FILL_CHAR;
-#endif
-
-#ifndef _EMPTY_CHAR
-static const char EMPTY_CHAR = ' ';
-#else
-static const char EMPTY_CHAR = _EMPTY_CHAR;
-#endif
+extern char FILL_CHAR;
+extern char EMPTY_CHAR;
 
 typedef struct {
     int width, height;
@@ -31,5 +22,8 @@ void display_empty(display *, int, int);
 void display_clear(display *);
 
 void display_show(display *);
+
+void display_set_fill(char);
+void display_set_empty(char);
 
 #endif

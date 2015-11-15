@@ -210,6 +210,7 @@ main(int argc, char **argv)
         }
     }
 
+    display_set_fill('O');
     tower_start(&d);
 
     display_destroy(&d);

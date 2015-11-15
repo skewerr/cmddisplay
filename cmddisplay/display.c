@@ -6,6 +6,11 @@
 #include "display.h"
 #include "misc.h"
 
+/* Defining global variables. */
+
+char FILL_CHAR = 219;
+char EMPTY_CHAR = ' ';
+
 /*
  * This is going to be the core of the cmddisplay library.
  * The functions here defined are as follows:
@@ -20,6 +25,8 @@
  * display_empty - puts an EMPTY_CHAR at position (x,y) of a display.
  * display_clear - turns every pixel in a display into EMPTY_CHAR.
  * display_show - exhibits the display onscreen.
+ * display_set_fill - changes the FILL_CHAR character.
+ * display_set_empty - changes the EMPTY_CHAR character.
  */
 
 void
@@ -60,7 +67,10 @@ display_gets(char *str, int size, display *d, int x, int y)
 char
 display_getc(display *d, int x, int y)
 {
-    return *(d->scr + (d->height - y - 1)*d->width + x);
+    if (x >= 0 && x < d->width && y >= 0 && y < d->height)
+        return *(d->scr + (d->height - y - 1)*d->width + x);
+    else
+        return EMPTY_CHAR;
 }
 
 
@@ -172,4 +182,16 @@ display_show(display *d)
     printf(buf);
 
     free(lin);
+}
+
+void
+display_set_fill(char nf)
+{
+    FILL_CHAR = nf;
+}
+
+void
+display_set_empty(char ne)
+{
+    EMPTY_CHAR = ne;
 }
