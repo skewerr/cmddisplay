@@ -59,6 +59,36 @@ class Display(object):
 
 		print buf[:-1]
 
+	def showregion(self, x1, y1, x2, y2):
+		
+		"""
+		Prints the content of the display in a region determined by two points.
+		"""
+
+		assert hasattr(self, "_screen"), \
+			"This method must be called from an instance."
+
+		assert type(x1) is int and type(y1) is int and \
+			type(x2) is int and type(y2) is int, \
+			"Coordinates must be given in (int, int) form."
+
+		if y1 > y2:
+			y1, y2 = y2, y1
+		if x1 > x2:
+			x1, x2 = x2, x1
+
+		buf = ""
+
+		for y in xrange(y2, y1 - 1, -1):
+
+			for x in xrange(x1, x2 + 1): 
+				buf += self._screen[(x, y)] if (x, y) in self._screen else \
+					self.empty_char
+
+			buf += "\n"
+
+		print buf[:-1]
+
 	def put(self, x, y, c):
 
 		"""
@@ -79,7 +109,7 @@ class Display(object):
 		Sets a given (x, y) position to this instance's fill_char attribute.
 		"""
 
-		self.set(x, y, self.fill_char)
+		self.put(x, y, self.fill_char)
 		self._update_minmax(x, y)
 
 	def empty(self, x, y):
