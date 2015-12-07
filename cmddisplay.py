@@ -1,3 +1,5 @@
+import math
+
 class Display(object):
 
 	"""
@@ -12,7 +14,7 @@ class Display(object):
 		self.fill_char = "@"
 
 	def _update_minmax(self, x, y, adding = True):
-		
+
 		"""
 		Updates self._min_y, self._max_y, self._min_x and self._max_x values.
 		"""
@@ -54,13 +56,13 @@ class Display(object):
 			for x in xrange(self._min_x, self._max_x + 1):
 				buf += self._screen[(x, y)] if (x, y) in self._screen else \
 					self.empty_char
-			
+
 			buf += "\n"
 
 		print buf[:-1]
 
 	def showregion(self, x1, y1, x2, y2):
-		
+
 		"""
 		Prints the content of the display in a region determined by two points.
 		"""
@@ -81,7 +83,7 @@ class Display(object):
 
 		for y in xrange(y2, y1 - 1, -1):
 
-			for x in xrange(x1, x2 + 1): 
+			for x in xrange(x1, x2 + 1):
 				buf += self._screen[(x, y)] if (x, y) in self._screen else \
 					self.empty_char
 
@@ -129,7 +131,7 @@ class Display(object):
 		self._update_minmax(x, y, False)
 
 	def get(self, x, y):
-		
+
 		"""
 		Returns the value of a pixel in given position (x, y).
 		"""
@@ -150,20 +152,21 @@ class Pencil(object):
 	"""
 
 	def __init__(self, display):
-		
-		assert type(display) is Display, \
-			"A pencil is associated with a display."
+
+		assert isinstance(display, Display), \
+			"A pencil is to be associated with a display."
 
 		self._target = display
-	
-	def drawrect(self, x1, y1, x2, y2, fill_char = None):
-		
+		self.fill_char = display.fill_char
+
+	def drawrect(self, x1, y1, x2, y2):
+
 		"""
 		Draws a rectangle using given coordinates as opposite vertices.
 		"""
 
-		if fill_char is None:
-			fill_char = self._target.fill_char
+		assert type(x1) is int and type(y1) is int and type(x2) is int and \
+			type(y2) is int, "Coordinates must be given in (int, int) form."
 
 		if x1 > x2:
 			x1, x2 = x2, x1
@@ -172,5 +175,91 @@ class Pencil(object):
 
 		for x in xrange(x1, x2):
 			for y in xrange(y1, y2):
-				self._target.put(x, y, fill_char)
+				self._target.put(x, y, self.fill_char)
+
+	def drawline(self, x1, y1, x2, y2):
+
+		"""
+		Draws a line given two points.
+		"""
+
+		assert type(x1) is int and type(y1) is int and type(x2) is int and \
+			type(y2) is int, "Coordinates must be given in (int, int) form."
+
+		if x1 == x2:
+			if y1 > y2:
+				y1, y2 = y2, y1
+
+			for y in xrange(y1, y2 + 1):
+				self._target.put(x1, y, self.fill_char)
+
+			return
+		elif y1 == y2:
+			if x1 > x2:
+				x1, x2 = x2, x1
+
+			for x in xrange(x1, x2 + 1):
+				self._target.put(x, y1, self.fill_char)
+
+			return
+
+		m = (y2 - y1)/(x2 - x1)
+		n = y1 - m*x1
+
+		if m > 1:
+			self._drawline_mgt1(y1, y2, m, n)
+		elif m < 1:
+			self._drawline_mlt1(x1, x2, m, n)
+		else:
+			if x1 > x2:
+				x1, x2 = x2, x1
+
+			for x in xrange(x1, x2 + 1):
+				self._target.put(x, x + n, self.fill_char)
+
+	def _drawline_mlt1(self, x1, x2, m, n):
+
+		"""
+		Rasterises a straight line given it has an angular coefficient lower
+		than 1.
+
+		It will walk each value of x, filling y with a Bresenham-like approach
+		to the real value of y in the correspondent point on the straight line.
+		"""
+
+		if x1 > x2:
+			x1, x2 = x2, x1
+
+		for x in xrange(x1, x2 + 1):
+			real_y  = m*x + n
+			floor_y = int(math.floor(real_y))
+			ceil_y  = int(math.ceil(real_y))
+
+			if abs(floor_y - real_y) < abs(ceil_y - real_y):
+				self._target.put(x, floor_y, self.fill_char)
+			else:
+				self._target.put(x, ceil_y, self.fill_char)
+
+	def _drawline_mgt1(self, y1, y2, m, n):
+
+		"""
+		Rasterises a straight line given it has an angular coefficient greater
+		than 1.
+
+		It will walk each value of y, filling x with a Bresenham-like approach
+		to the real value of x in the correspondent point on the straight line.
+		"""
+
+		if y1 > y2:
+			y1, y2 = y2, y1
+
+		for y in xrange(y1, y2 + 1):
+			real_x = (y - n)/m
+			floor_x = int(math.floor(real_x))
+			ceil_x = int(math.ceil(real_x))
+
+			if abs(floor_x - real_x) < abs(ceil_x - real_x):
+				self._target.put(floor_x, y, self.fill_char)
+			else:
+				self._target.put(ceil_x, y, self.fill_char)
 
